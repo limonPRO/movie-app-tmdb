@@ -66,8 +66,7 @@ This project is a responsive movie search and details application built using [N
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/movie-app.git
-   cd movie-app
+   open terminal of the directory 
    npm run i
    npm run dev
 
