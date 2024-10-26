@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Movie Search and Details App
+
+## Overview
+
+This project is a responsive movie search and details application built using [Next.js](https://nextjs.org/) (version 13/14) and the [TMDB API](https://developers.themoviedb.org/3). The app features infinite scrolling or a "Load More" button on the homepage, movie details pages, and a favorites/watchlist feature.
+
+## Features
+
+### Homepage
+- **Movie List with Infinite Scrolling/Load More**: 
+  - Displays a list of popular movies fetched from the TMDB API.
+  - Implements infinite scrolling or a "Load More" button for fetching and displaying more movies dynamically.
+  - Movies are fetched in pages (20 movies per API request) using client-side rendering.
+  - Lazy-loads movie posters for optimized performance.
+
+- **Search Bar**: 
+  - Allows users to search for movies by title using the TMDB search API.
+  - Displays search results with the same infinite scroll or Load More behavior.
+
+### Movie Details Page
+- **Dynamic Route for Movie Details**: 
+  - Navigates to a dynamic route when a movie is selected from the homepage.
+  - Fetches detailed information about the movie using the TMDB movie details API.
+  - Uses Server-Side Rendering (SSR) with Incremental Static Regeneration (ISR) to keep the data fresh.
+
+- **Display Information**: 
+  - Shows the movie poster, full description, genres, release date, and cast.
+  - Displays related movie recommendations with periodic revalidation.
+
+### Favorites/Watchlist
+- **Add to Favorites/Watchlist**: 
+  - Users can add or remove movies from a favorites/watchlist.
+  - Stores the watchlist using Server Actions .
+
+- **Watchlist Page**: 
+  - Displays all movies the user has added to their watchlist.
+  - Allows users to remove movies from the watchlist.
+
+### Optional Features
+- **Dark Mode Toggle**: 
+  - Implements a dark mode toggle that persists user preferences using cookies or localStorage.
+
+
+- **Auth**: 
+  - google login and make protected route using middile ware .
+  - 
+- **Global State Management**: 
+  - Uses React Context or Zustand for managing global settings like dark mode and watchlist status.
+
+## Extra Credit Features
+- **API Response Validation**: 
+  - Uses [Zod](https://zod.dev/) to validate API responses from TMDB.
+
+- **Optimistic UI**: 
+  - Implements an  for adding/removing movies from the watchlist.
+
+- **Dynamic Caching**: 
+  - Uses Next.js Dynamic Caching to improve performance with API calls.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (version 14.x or higher)
+- npm or yarn
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/movie-app.git
+   cd movie-app
+   npm run i
+   npm run dev
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
