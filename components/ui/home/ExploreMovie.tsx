@@ -43,7 +43,7 @@ const ExploreMovie = () => {
 
   return (
     <div className="px-8 w-full mt-[100px]">
-      <div className="w-full mt-4 grid grid-cols-5 lg:grid-cols-4 sm:grid-cols-2 lg:gap-1 gap-3">
+      <div className="w-full mt-4 grid grid-cols-5 lg:grid-cols-4 sm:grid-cols-2 xs:grid-cols-2 lg:gap-1 gap-3">
         {searchText && movies.length === 0 ? (
           <div className="col-span-5 text-center">
             <p>No data found for the search.</p>

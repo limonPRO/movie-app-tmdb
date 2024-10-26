@@ -8,21 +8,26 @@ import { useRouter } from "next/navigation"; // Import useRouter for navigation
 import SearchForm from "../form/SearchForm";
 import { RootState } from "@/config/reduxStoreConfig";
 import { doLogout } from "@/app/actions/loginAction";
+import { clearUser } from "@/fetures/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const router = useRouter(); // Initialize the router
-  const [searchText, setSearchText] = useState(""); // Local state for search input
+  const router = useRouter(); 
+  const [searchText, setSearchText] = useState(""); 
 
   const handleSearchSubmit = (query: string) => {
     if (query) {
       dispatch(handleInput({ text: query }));
-      router.push("/"); // Navigate to the home route
+      router.push("/"); 
     }
   };
 
   const {user} = useSelector((state:RootState)=>state.user)
-
+  
+  const logOut=()=>{
+      doLogout()
+      dispatch(clearUser())
+  }
 
   return (
     <header className="header-bg h-[74px] sd-primary fixed top-0 left-0 right-0 z-50 flex items-center">
@@ -39,9 +44,10 @@ const Header = () => {
           <li className="md:block hidden">
             <Link href={"/watchlist"}>watchlist</Link>
           </li>
+          <li> {user && <button onClick={logOut}>logout </button>}</li>
         </ul>
         {/* Uncomment the logout button if needed */}
-        {user && <button onClick={doLogout}>logout </button>}
+       
       </div>
     </header>
   );

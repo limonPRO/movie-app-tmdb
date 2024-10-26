@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Movie } from "@/types/MovieTypes";
+import { CiCircleRemove } from "react-icons/ci";
 
 const MovieCard = ({ movie, onRemove, isInWatchlist }: { movie: Movie; onRemove?: (id: number) => void; isInWatchlist?: boolean }) => {
   if (!movie) {
@@ -15,7 +16,7 @@ const MovieCard = ({ movie, onRemove, isInWatchlist }: { movie: Movie; onRemove?
     }
   };
 
-  
+
   return (
     <div className="relative w-full">
       <div className="w-full pr-2">
@@ -35,9 +36,9 @@ const MovieCard = ({ movie, onRemove, isInWatchlist }: { movie: Movie; onRemove?
         {isInWatchlist && (
           <button
             className="absolute top-2 left-2 text-red-500 hover:text-red-700"
-            onClick={handleRemove} // Use the handleRemove function
+            onClick={handleRemove} 
           >
-            Remove {/* Replace with your preferred icon */}
+            <CiCircleRemove size={40} color="red" />
           </button>
         )}
       </div>
