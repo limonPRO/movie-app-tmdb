@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import commonReducer from "../fetures/commonSlice"
-import userReducer from "../fetures/userSlice"
+import commonReducer from "../features/commonSlice"
+import userReducer from "../features/userSlice"
 
 export const store = configureStore({
   reducer: {

@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { debounce } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import { handleInput } from "@/features/commonSlice";
+import { useRouter } from "next/navigation";
+import { RootState } from "@/config/reduxStoreConfig"; // Adjust this import based on your setup
 
 const searchSchema = z.object({
   search: z.string().min(3, "Minimum length is 3 characters"),
@@ -10,30 +14,42 @@ const searchSchema = z.object({
 
 type SearchFormInputs = z.infer<typeof searchSchema>;
 
-const SearchForm = ({ onSearch }: { onSearch: (query: string) => void }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SearchFormInputs>({
+const SearchForm = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const searchText = useSelector((state: RootState) => state.common.text); // Access searchText from the store
+  
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchSchema),
   });
 
-  const [showError, setShowError] = useState(false); // State to control error visibility
+  const [showError, setShowError] = useState(false);
 
   // Debounced function to handle search input
-  const debouncedSearch = debounce((data: SearchFormInputs) => {
-    onSearch(data.search);
+  const debouncedSearch = debounce((query: string) => {
+    handleSearchSubmit(query);
   }, 300);
 
   const onSubmit = (data: SearchFormInputs) => {
-    setShowError(false); // Reset error visibility on submit
-    debouncedSearch(data);
+    setShowError(false); 
+    debouncedSearch(data.search);
   };
 
-  const onError = (errors: any) => {
-    setShowError(true); // Show error if validation fails
+  const onError = () => {
+    setShowError(true); 
   };
+
+  const handleSearchSubmit = (query: string) => {
+    dispatch(handleInput({ text: query }));
+    router.push("/");
+  };
+
+  // Clear the search field when searchText in the store is empty
+  useEffect(() => {
+    if (!searchText) {
+      setValue("search", ""); // Clear input field
+    }
+  }, [searchText, setValue]);
 
   return (
     <div className="flex flex-col">
@@ -52,7 +68,7 @@ const SearchForm = ({ onSearch }: { onSearch: (query: string) => void }) => {
         </button>
       </form>
       {errors.search && (
-        <span className="text-red-500 text-sm">{errors.search.message}</span>
+        <span className="mt-2 text-red-500 text-xs">{errors.search.message}</span>
       )}
     </div>
   );

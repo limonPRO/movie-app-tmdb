@@ -16,19 +16,22 @@ const ExploreMovie = () => {
 
   // @ts-ignore
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["get-movies", searchText], 
+    queryKey: ["get-movies", searchText || "all"],
     queryFn: ({ pageParam = 1 }) => {
+      // Fetch movies based on search text or fetch all movies
       return searchText
         ? fetchSearchMovie(searchText, pageParam) 
         : fetchExploreMovie(pageParam); 
     },
     staleTime: 1000 * 24,
     getNextPageParam: (lastPage:any, allPages) => {
-      return lastPage && lastPage?.length > 0 ? allPages.length + 1 : undefined;
+      // Check if there are more pages to load
+      return lastPage && lastPage.length > 0 ? allPages.length + 1 : undefined;
     },
   });
 
   useEffect(() => {
+    // Fetch next page when the user scrolls to the bottom and there are more pages
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
@@ -38,7 +41,6 @@ const ExploreMovie = () => {
     return <LoadingSpinner />;
   }
 
-  // Flatten the pages into a single array of movies
   const movies = data?.pages.flatMap((page) => page) || [];
 
   return (
