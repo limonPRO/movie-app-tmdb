@@ -66,7 +66,8 @@ This project is a responsive movie search and details application built using [N
 ### Installation
 1. Clone the repository:
    ```bash
-   open terminal of the directory 
+ 
+   - go to the directory and make .env file in the root copy everything from .env.example and fill up 
    npm run i
    npm run dev
 
