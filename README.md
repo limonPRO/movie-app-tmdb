@@ -69,7 +69,7 @@ This project is a responsive movie search and details application built using [N
  
    - go to the directory and make .env file in the root copy everything fill up with your value
 
-   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 API_URL=
 API_KEY=
 ACCESS_TOKEN=
