@@ -45,7 +45,7 @@ This project is a responsive movie search and details application built using [N
   - google login and make protected route using middile ware .
   - 
 - **Global State Management**: 
-  - Uses React Context or Zustand for managing global settings like dark mode and watchlist status.
+  - Uses redux.
 
 ## Extra Credit Features
 - **API Response Validation**: 
@@ -53,9 +53,6 @@ This project is a responsive movie search and details application built using [N
 
 - **Optimistic UI**: 
   - Implements an  for adding/removing movies from the watchlist.
-
-- **Dynamic Caching**: 
-  - Uses Next.js Dynamic Caching to improve performance with API calls.
 
 ## Getting Started
 
